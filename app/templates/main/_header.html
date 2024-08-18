@@ -1,0 +1,26 @@
+<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+    <a href="{{ url_for('post.all') }}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <img class="header__img" src="{{ url_for('static', filename='img/student.png') }}" alt="student">
+    </a>
+
+    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{{ url_for('post.all') }}" class="nav-link px-2 text-secondary">Главная</a></li>
+        {% if current_user.is_authenticated and current_user.status == 'teacher' %}
+        <li><a href="{{ url_for('post.create') }}" class="nav-link px-2 text-white">Добавить тему</a></li>
+        {% endif %}
+    </ul>
+
+    <div class="text-end">
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('user.logout') }}" class="btn btn-outline-light me-2">Выйти</a>
+        {% else %}
+            <a href="{{ url_for('user.login') }}" class="btn btn-outline-light me-2">Войти</a>
+            <a href="{{ url_for('user.register') }}" class="btn btn-warning">Регистрация</a>
+        {% endif %}
+    </div>
+    {% if current_user.is_authenticated %}
+    <div class="dropdown text-end">
+        <a class="btn btn-outline-primary disabled">{{ current_user.name }}</a>
+    </div>
+    {% endif %}
+</div>
